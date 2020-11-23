@@ -11,6 +11,18 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  currentRank: {
+    type: String,
+    required: true,
+  },
+  mainRole: {
+    type: String,
+    required: true,
+  },
+  secondaryRole: {
+    type: String,
+    required: true,
+  },
 });
 
 const User = mongoose.model('User', userSchema);

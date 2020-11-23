@@ -8,9 +8,21 @@ dotenv.config();
 // Register new user
 export const registerUser = async (req, res) => {
   try {
-    const { summonerName, password } = req.body;
+    const {
+      summonerName,
+      password,
+      currentRank,
+      mainRole,
+      secondaryRole,
+    } = req.body;
 
-    if (!summonerName || !password) {
+    if (
+      !summonerName ||
+      !password ||
+      !currentRank ||
+      !mainRole ||
+      !secondaryRole
+    ) {
       return res.status(400).json({ msg: 'Please enter all fields' });
     }
     // Check for existing user
@@ -23,6 +35,9 @@ export const registerUser = async (req, res) => {
     const newUser = new User({
       summonerName,
       password,
+      currentRank,
+      mainRole,
+      secondaryRole,
     });
 
     // Create salt & hash
@@ -39,6 +54,9 @@ export const registerUser = async (req, res) => {
               user: {
                 id: user.id,
                 summonerName: user.summonerName,
+                currentRank: user.currentRank,
+                mainRole: user.mainRole,
+                secondaryRole: user.secondaryRole,
               },
             });
           });
